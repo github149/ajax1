@@ -1,0 +1,1 @@
+console.log('ajax请求的log')

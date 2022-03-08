@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>这是div中的文字</div>
+    <div id="xmlspan"></div>
+    <button id="getHTML">请求HTML</button>
+    <button id="getJS">请求js</button>
+    <button id="getCss">请求css</button>
+    <button id="xml">请求xml</button>
+    <button id="getJSON">
+        请求JSON
+    </button>
+
+    <script>
+        //解析html
+        const publicPath = 'http://localhost:5500'
+        getJSON.onclick = function() {
+            const xml = new XMLHttpRequest()
+            xml.open('GET', publicPath + '/5.json')
+            xml.onreadystatechange = function() {
+                if (xml.readyState === 4 && xml.status === 200) {
+                    let obj = JSON.parse(xml.response)
+                    console.log(obj)
+                }
+            }
+            xml.send()
+
+        }
+        xml.onclick = function() {
+            const xml = new XMLHttpRequest()
+            xml.open('GET', publicPath + '/4.xml')
+            xml.onreadystatechange = () => {
+                if (xml.readyState === 4 && xml.status === 200) {
+                    xmlspan.innerText = xml.responseXML.getElementsByTagName('warning')[0].textContent.trim()
+                }
+            }
+            xml.send()
+
+        }
+        getHTML.onclick = function() {
+            const xml = new XMLHttpRequest()
+            xml.open('GET', publicPath + '/3.html')
+            xml.onreadystatechange = () => {
+                if (xml.readyState === 4 && xml.status === 200) {
+                    console.log(xml.response)
+                    let div = document.createElement('div')
+                    div.innerHTML = xml.response
+                    document.body.appendChild(div)
+                }
+
+            }
+            xml.send()
+        }
+        getJS.onclick = function() {
+            const xml = new XMLHttpRequest()
+            xml.open('GET', publicPath + '/2.js')
+            xml.onreadystatechange = function() {
+                if (xml.readyState === 4 && xml.status === 200) {
+                    let script = document.createElement('script')
+                    script.innerHTML = xml.response
+                    document.body.appendChild(script)
+                }
+            }
+            xml.send()
+        }
+        getCss.onclick = function() {
+            const xml = new XMLHttpRequest()
+            xml.open('GET', publicPath + '/2.css')
+            xml.onreadystatechange = function() {
+                if (xml.readyState === 4 && xml.status === 200) {
+                    const style = document.createElement('style')
+                    style.innerText = xml.response
+                    document.body.appendChild(style)
+                }
+            }
+            xml.send()
+        }
+
+
+        //解析js
+    </script>
+
+</body>
+
+</html>
